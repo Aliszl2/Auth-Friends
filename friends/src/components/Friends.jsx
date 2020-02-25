@@ -20,6 +20,13 @@ export default function Friends() {
       });
   }, []);
 
+ const deleteFriend = id =>{
+    setFriends(
+       friends.filter(friend=>friend.id != id)
+    )
+      }
+   
+
   return (
     <div>
   
@@ -30,7 +37,7 @@ export default function Friends() {
         key={friend.id}>{friend.name}  
          ({friend.age})<br/>
          {friend.email}
-         <button>Delete</button>
+         <button onClick={()=>deleteFriend(friend.id)}>Delete</button>
          </li>
         ))}
       </div>
