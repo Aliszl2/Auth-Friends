@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, NavLink, Redirect } from "react-router-dom";
 import Friends from "./components/Friends";
 import Login from "./components/Login";
@@ -13,6 +13,8 @@ function App() {
     // props.history.push("/login");
     // < Redirect to= "/login"/>
   };
+
+
   return (
     <div className="App">
       Friends <br />
@@ -22,7 +24,11 @@ function App() {
       <button onClick={onLogout}>LogOut</button>
       <Route path="/friends" component={Friends} />
       <Route path="/login" component={Login} />
-      <Route path="/addfriend" component={AddFriendForm} />
+
+      <Route 
+      path="/addfriend" 
+      component={AddFriendForm}
+          />
     </div>
   );
 }
