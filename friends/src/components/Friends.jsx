@@ -26,7 +26,12 @@ export default function Friends() {
       <div className="friends">
         <h1>List of Friends</h1>
         {friends.map(friend => (
-        <li key={friend.id}>{friend.name}   ({friend.age})<br/>{friend.email}</li>
+        <li 
+        key={friend.id}>{friend.name}  
+         ({friend.age})<br/>
+         {friend.email}
+         <button>Delete</button>
+         </li>
         ))}
       </div>
       
