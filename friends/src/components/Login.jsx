@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 import axios from "axios";
 
-
-export default function Login(props) {
+function Login(props) {
   const usernameRef = useRef();
   const passwordRef = useRef();
+  console.log(props);
 
   const submit = () => {
     axios
@@ -14,13 +14,13 @@ export default function Login(props) {
       })
       .then(res => {
         console.log(res);
-  
+
         localStorage.setItem("token", res.data.payload);
         console.log(res.data.payload);
         props.history.push("/friends");
       })
       .catch(error => {
-             alert(error.message);
+        alert(error.message);
       });
   };
 
@@ -29,12 +29,14 @@ export default function Login(props) {
       <div className="login-inputs">
         username <input ref={usernameRef} type="text" />
         <br />
-        password <input ref={passwordRef} type="text"/>
+        password <input ref={passwordRef} type="text" />
       </div>
 
       <div>
-        <button onClick={submit} >Submit</button>
+        <button onClick={submit}>Submit</button>
       </div>
     </div>
   );
 }
+
+export default Login;
