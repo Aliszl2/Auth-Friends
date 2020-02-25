@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { axiosWithAuth } from "../auth/axiosWithAuth"
-
+import { axiosWithAuth } from "../auth/axiosWithAuth";
 
 export default function Friends() {
   const [friends, setFriends] = useState([]);
 
   useEffect(() => {
-
     axiosWithAuth()
       .get(`http://localhost:5000/api/friends`)
       .then(res => {
-        console.log(res.data)
+        console.log(res.data);
         setFriends(res.data);
       })
       .catch(error => {
@@ -20,28 +18,28 @@ export default function Friends() {
       });
   }, []);
 
- const deleteFriend = id =>{
-    setFriends(
-       friends.filter(friend=>friend.id != id)
-    )
-      }
-   
+  const deleteFriend = (event, id) => {
+    event.preventDefault();
+    axiosWithAuth()
+      .delete(`http://localhost:5000/api/friends/${id}`)
+      .then(response => {
+        setFriends(friends.filter(friend => friend.id != id));
+      })
+      .catch(error => console.log(error.message));
+  };
 
   return (
     <div>
-  
       <div className="friends">
         <h1>List of Friends</h1>
         {friends.map(friend => (
-        <li 
-        key={friend.id}>{friend.name}  
-         ({friend.age})<br/>
-         {friend.email}
-         <button onClick={()=>deleteFriend(friend.id)}>Delete</button>
-         </li>
+          <li key={friend.id}>
+            {friend.name}({friend.age})<br />
+            {friend.email}
+            <button onClick={(event) => deleteFriend(event, friend.id)}>Delete</button>
+          </li>
         ))}
       </div>
-      
     </div>
   );
 }

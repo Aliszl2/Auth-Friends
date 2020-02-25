@@ -1,22 +1,20 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { axiosWithAuth } from "../auth/axiosWithAuth";
 
-
-const AddFriendForm=(props) => {
-
-const [friend, setFriend] = useState({ name: "", age: "", email: "" });
+const AddFriendForm = props => {
+  const [friend, setFriend] = useState({ name: "", age: "", email: "" });
   const onInputChange = evt => {
-    console.log(evt.target.value)
-    setFriend({...friend, [evt.target.name]: evt.target.value});
+    console.log(evt.target.value);
+    setFriend({ ...friend, [evt.target.name]: evt.target.value });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
     console.log(e.target.name);
-  
+
     axiosWithAuth()
       .post("http://localhost:5000/api/friends", friend)
-        .then(res => {
+      .then(res => {
         props.history.push("./friends");
       })
       .catch(error => {
@@ -26,14 +24,14 @@ const [friend, setFriend] = useState({ name: "", age: "", email: "" });
   return (
     <div className="New-friend-form">
       <h1>Enter New friend:</h1>
-      <form className="form"  onSubmit={e => handleSubmit(e)}>
+      <form className="form" onSubmit={e => handleSubmit(e)}>
         <label>
           name:
           <input
             type="text"
             name="name"
             placeholder="Enter name"
-                    value={friend.name}
+            value={friend.name}
             onChange={e => onInputChange(e)}
           />
         </label>{" "}
@@ -45,7 +43,6 @@ const [friend, setFriend] = useState({ name: "", age: "", email: "" });
             name="age"
             value={friend.age}
             onChange={e => onInputChange(e)}
-        
           />
         </label>{" "}
         <br /> <br />
@@ -63,5 +60,5 @@ const [friend, setFriend] = useState({ name: "", age: "", email: "" });
       </form>
     </div>
   );
-}
+};
 export default AddFriendForm;
