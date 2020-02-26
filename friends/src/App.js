@@ -4,7 +4,7 @@ import Friends from "./components/Friends";
 import Login from "./components/Login";
 import AddFriendForm from "./components/AddFriend";
 import { axiosWithAuth } from "./auth/axiosWithAuth";
-import { Menu } from "antd";
+import { Menu, Button } from "antd";
 import Navigation from "./components/Navigation";
 import "./App.css";
 import "antd/dist/antd.css";
@@ -34,7 +34,7 @@ function App(props) {
   return (
     <div className="App">
       <Navigation />
-      <button onClick={onLogout}>LogOut</button>
+      <Button onClick={onLogout} type="primary">LogOut</Button>
       <br />
 
       <Route path="/login" component={Login} />

@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { axiosWithAuth } from "../auth/axiosWithAuth";
+
+
 
 const AddFriendForm = props => {
   console.log(props);
+
   const [friend, setFriend] = useState({ name: "", age: "", email: "" });
   const onInputChange = evt => {
     console.log(evt.target.value);
